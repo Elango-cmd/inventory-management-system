@@ -1,0 +1,21 @@
+<div class="product-detail-container" *ngIf="product as p">
+  <h2>Product Details</h2>
+
+  <p><strong>ID:</strong> {{ p.productId }}</p>
+  <p><strong>Name:</strong> {{ p.name }}</p>
+  <p><strong>Quantity:</strong> {{ p.quantity }}</p>
+  <p><strong>Price:</strong> {{ p.price | currency }}</p>
+
+  <h3>Supplier Information</h3>
+  <div *ngIf="p.inventorySupplierDTO as supplier; else noSupplier">
+    <p><strong>Name:</strong> {{ supplier.name }}</p>
+    <p><strong>Email:</strong> {{ supplier.email }}</p>
+    <p><strong>Phone:</strong> {{ supplier.phone }}</p>
+    <p><strong>Address:</strong> {{ supplier.address }}</p>
+  </div>
+  <ng-template #noSupplier>
+    <p>No supplier information available.</p>
+  </ng-template>
+
+  <button (click)="goBack()">Back to Products</button>
+</div>

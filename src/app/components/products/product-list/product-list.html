@@ -1,0 +1,45 @@
+<div class="product-list-container">
+  <h2>Product List</h2>
+
+  <button (click)="addProduct()">+ Add Product</button>
+
+  <div *ngIf="loading">Loading products...</div>
+  <div *ngIf="errorMessage">{{ errorMessage }}</div>
+
+  <table *ngIf="!loading && products.length > 0">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Supplier</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of products">
+        <td>{{ p.productId }}</td>
+        <td>{{ p.name }}</td>
+        <td>{{ p.quantity }}</td>
+        <td>{{ p.price | currency }}</td>
+        <td *ngIf="p.inventorySupplierDTO; else noSupplier">
+             {{ p.inventorySupplierDTO.name }}
+        </td>
+    <ng-template #noSupplier>
+        No supplier
+    </ng-template>
+
+        <td>
+          <button (click)="viewProduct(p.productId!)">View</button>
+          <button (click)="editProduct(p.productId!)">Edit</button>
+          <button (click)="deleteProduct(p.productId!)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="!loading && products.length === 0">
+    No products found.
+  </div>
+</div>

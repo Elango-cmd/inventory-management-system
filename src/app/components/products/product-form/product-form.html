@@ -1,0 +1,54 @@
+<div class="product-form-container">
+  <h2>{{ isEditMode ? 'Edit Product' : 'Add Product' }}</h2>
+
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <!-- Name -->
+    <div>
+      <label for="name">Product Name</label>
+      <input id="name" formControlName="name" type="text" />
+      <div *ngIf="productForm.get('name')?.touched && productForm.get('name')?.invalid">
+        <small>Name is required.</small>
+      </div>
+    </div>
+
+    <!-- Quantity -->
+    <div>
+      <label for="quantity">Quantity</label>
+      <input id="quantity" formControlName="quantity" type="number" />
+      <div *ngIf="productForm.get('quantity')?.touched && productForm.get('quantity')?.invalid">
+        <small>Enter a valid quantity (min 1).</small>
+      </div>
+    </div>
+
+    <!-- Price -->
+    <div>
+      <label for="price">Price</label>
+      <input id="price" formControlName="price" type="number" step="0.01" />
+      <div *ngIf="productForm.get('price')?.touched && productForm.get('price')?.invalid">
+        <small>Enter a valid price.</small>
+      </div>
+    </div>
+
+    <!-- Supplier Dropdown -->
+    <div>
+      <label for="supplierId">Supplier</label>
+      <select id="supplierId" formControlName="supplierId">
+        <option value="">-- Select Supplier --</option>
+        <option *ngFor="let s of suppliers" [value]="s.supplierId">
+          {{ s.name }}
+        </option>
+      </select>
+      <div *ngIf="productForm.get('supplierId')?.touched && productForm.get('supplierId')?.invalid">
+        <small>Supplier is required.</small>
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="form-actions">
+      <button type="submit" [disabled]="productForm.invalid">
+        {{ isEditMode ? 'Update' : 'Create' }}
+      </button>
+      <button type="button" (click)="onCancel()">Cancel</button>
+    </div>
+  </form>
+</div>

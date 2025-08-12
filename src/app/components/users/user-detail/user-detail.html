@@ -1,0 +1,29 @@
+<div class="container mt-4" *ngIf="!loading && user; else loadingOrError">
+  <h2>User Details</h2>
+
+  <table class="table table-bordered">
+    <tr>
+      <th>User ID</th>
+      <td>{{ user.userId }}</td>
+    </tr>
+    <tr>
+      <th>User Name</th>
+      <td>{{ user.userName }}</td>
+    </tr>
+    <tr>
+      <th>Email</th>
+      <td>{{ user.emailId }}</td>
+    </tr>
+    <tr>
+      <th>Role</th>
+      <td>{{ user.role }}</td>
+    </tr>
+  </table>
+
+  <button class="btn btn-secondary" (click)="goBack()">Back to User List</button>
+</div>
+
+<ng-template #loadingOrError>
+  <div *ngIf="loading">Loading user details...</div>
+  <div *ngIf="errorMessage" class="text-danger">{{ errorMessage }}</div>
+</ng-template>

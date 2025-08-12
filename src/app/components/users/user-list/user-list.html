@@ -1,0 +1,31 @@
+<div class="container mt-4">
+  <h2>User List</h2>
+  <button class="btn btn-primary mb-3" (click)="router.navigate(['/users/new'])">Add User</button>
+
+  <table class="table table-bordered table-striped" *ngIf="users.length > 0">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>User Name</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let u of users">
+        <td>{{ u.userId }}</td>
+        <td>{{ u.userName }}</td>
+        <td>{{ u.emailId }}</td>
+        <td>{{ u.role }}</td>
+        <td>
+          <button class="btn btn-info btn-sm" (click)="viewUser(u.userId)">View</button>
+          <button class="btn btn-warning btn-sm" (click)="editUser(u.userId)">Edit</button>
+          <button class="btn btn-danger btn-sm" (click)="deleteUser(u.userId)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p *ngIf="!users.length && !loading">No users found.</p>
+</div>

@@ -1,0 +1,34 @@
+<div class="container">
+  <h2>Suppliers</h2>
+  <button routerLink="/add-supplier" class="btn btn-primary">Add Supplier</button>
+
+  <table class="table table-striped mt-3" *ngIf="suppliers.length > 0; else noData">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Address</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let supplier of suppliers">
+        <td>{{ supplier.supplierId }}</td>
+        <td>{{ supplier.name }}</td>
+        <td>{{ supplier.email }}</td>
+        <td>{{ supplier.phone }}</td>
+        <td>{{ supplier.address }}</td>
+        <td>
+          <button [routerLink]="['/edit-supplier', supplier.supplierId]" class="btn btn-warning btn-sm">Edit</button>
+          <button (click)="deleteSupplier(supplier.supplierId!)" class="btn btn-danger btn-sm">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #noData>
+    <p>No suppliers found.</p>
+  </ng-template>
+</div>
